@@ -5,13 +5,14 @@
     
     <title>修行之路</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="/blog/css/style.css">
 </head>
 
 <body>
     <div id="container">
         <div id="col-left">
-            <section>
+            <sidebar>
     <div class="sidebar-top"></div>
     
     <div class="sidebar-content center">
@@ -37,105 +38,128 @@
             </section>
         </div>
     </div>
-</section>
+</sidebar>
         </div>
         <div id="col-right">
-            
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      
-    </div>
-  
-  <div class="article-inner">
+            <div class="body-wrap">
     
+        <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
     
-      <header class="article-header">
+        <div class="article-meta">
+            <a href="/blog/2016/04/10/test/" class="article-date">
+    <time datetime="2016-04-10T09:18:00.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
         
-      </header>
-      
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/10/test/">test</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>#test</p>
+
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/test/">test</a></li></ul>
+    </div>
+
+            
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Begin"><a href="#Begin" class="headerlink" title="Begin:"></a>Begin:</h1><p>@(帐号密码)[自动化部署]</p>
+        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/04/09/hello-world/" class="article-date">
+    <time datetime="2016-04-09T11:50:26.000Z" itemprop="datePublished">2016-04-09</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/09/hello-world/">Hello World</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <h1 id="Begin"><a href="#Begin" class="headerlink" title="Begin:"></a>Begin:</h1><p>@(帐号密码)[自动化部署]</p>
 <p><img width="800" src="http://ww2.sinaimg.cn/large/e7bf5cc4jw1ezvelaae1yj2128076q4z.jpg"></p>
 <h3 id="平台"><a href="#平台" class="headerlink" title="平台:"></a>平台:</h3><blockquote>
 <ol>
-<li>GitLab官网 (<a href="http://gitlab.org" target="_blank" rel="external">http://gitlab.org</a>)</li>
-<li>百度民间GitLab (<a href="http://gitlab.baidu.com" target="_blank" rel="external">http://gitlab.baidu.com</a>)</li>
+<li>GitLab官网 (<a href="http://gitlab.org">http://gitlab.org</a>)</li>
+<li>百度民间GitLab (<a href="http://gitlab.baidu.com">http://gitlab.baidu.com</a>)</li>
 </ol>
 </blockquote>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h3><blockquote>
-<p>之前更新版本一般有两种方法</p>
-<ol>
-<li>采用写好的shell，使用crontab设定操作，隔段时间执行更新脚本，但是这种显然不是一种好的做法。</li>
-<li>使用ssh压缩打包上传部署，例如使用Fabric，但公司的测试机是需要用堡垒机登录的，这种方法并不能实现自动化。</li>
-</ol>
-<p>现在很多项目接入了gitlab, 我们就可以使用git push后自动执行更新脚本。</p>
-</blockquote>
-<h3 id="之前的方法"><a href="#之前的方法" class="headerlink" title="之前的方法"></a>之前的方法</h3><blockquote>
-<p>crontab方法</p>
-<blockquote>
-<ol>
-<li>写好shell脚本<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="comment">#!/bin/sh</span></span><br><span class="line">&gt;&gt; <span class="built_in">cd</span> /home/mota/web/frontend/</span><br><span class="line">&gt;&gt; git remote update -p</span><br><span class="line">&gt;&gt; git checkout <span class="_">-f</span> origin/master</span><br><span class="line">&gt;&gt; git submodule update --init</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>在 crontab 中每隔段时间执行更新<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; sh /home/mota/web/update.sh &amp;&gt; /dev/null</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>PS: 这样虽然看似正常，但是每隔段时间访问，是不正确的。</p>
-</blockquote>
-<p>SSH部署</p>
-<blockquote>
-<p>这里只介绍Fabric实现</p>
-<ol>
-<li>编写fabfile.py脚本 (只写个简单实现)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="comment">#!/usr/bin/env python</span></span><br><span class="line">&gt;&gt; env.user = <span class="string">'root'</span></span><br><span class="line">&gt;&gt; env.hosts = [<span class="string">'127.0.0.1'</span>]</span><br><span class="line">&gt;&gt; env.passpord = <span class="string">'f**k me on github'</span></span><br><span class="line">&gt;&gt; @task</span><br><span class="line">&gt;&gt; @put</span><br><span class="line">&gt;&gt; <span class="function"><span class="keyword">def</span> <span class="title">put_task</span><span class="params">()</span>:</span></span><br><span class="line">&gt;&gt;     run(<span class="string">'mkdir -p /data/logs'</span>)</span><br><span class="line">&gt;&gt;     <span class="keyword">with</span> cd(<span class="string">'/data/log'</span>)</span><br><span class="line">&gt;&gt;         result = put(<span class="string">'/data/logs/mota.tar.gz'</span>, <span class="string">'/data/logs/mota.tar.gz'</span>)</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>2.执行fab : <code>fab -f fabfile.py put_task</code></p>
-</blockquote>
-</blockquote>
-<h3 id="Git-Hook"><a href="#Git-Hook" class="headerlink" title="Git Hook"></a>Git Hook</h3><blockquote>
-<p>Git 会在某些特定事件触发hook，如果有需要，便可在相应位置插入需要的钩子，使用到的是 post-receive。<br>post-receive 是在 server 端，每次处理完 push 后触发。</p>
-</blockquote>
-<h3 id="GitLab-Web-Hook"><a href="#GitLab-Web-Hook" class="headerlink" title="GitLab Web Hook"></a>GitLab Web Hook</h3><blockquote>
-<p>GitLab 会在某些特定事件后执行hook，并提供了相应的WebHook的接口，这样我们就可以使用它触发服务，比如CI等等。<br>GitLab Web Hooks 触发时会发一条POST请求给相应的钩子，格式大致如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">    &#123;</span><br><span class="line">    "object_kind": "push",</span><br><span class="line">    "before": "df33e9dd9a1975b66f59fe61ebd70b72d40e02a9",</span><br><span class="line">    "after": "54d5a054570b60cab34ff1d0f98e4b6f4e0682ca",</span><br><span class="line">    "ref": "refs/heads/master",</span><br><span class="line">    "checkout_sha": "54d5a054570b60cab34ff1d0f98e4b6f4e0682ca",</span><br><span class="line">    "message": null,</span><br><span class="line">    "user_id": 6746,</span><br><span class="line">    "user_name": "lili39",</span><br><span class="line">    "user_email": "lili39@baidu.com",</span><br><span class="line">    "project_id": 13644,</span><br><span class="line">    "repository": &#123;</span><br><span class="line">        "name": "mota-wap",</span><br><span class="line">        "url": "ssh://g@gitlab.baidu.com:8022/lili39/mota-wap.git",</span><br><span class="line">        "description": "mota-wap",</span><br><span class="line">        "homepage": "http://gitlab.baidu.com/lili39/mota-wap",</span><br><span class="line">        "git_http_url": "http://gitlab.baidu.com/lili39/mota-wap.git",</span><br><span class="line">        "git_ssh_url": "ssh://g@gitlab.baidu.com:8022/lili39/mota-wap.git",</span><br><span class="line">        "visibility_level": 20</span><br><span class="line">    &#125;,</span><br><span class="line">    "commits": [</span><br><span class="line">        &#123;</span><br><span class="line">            "id": "54d5a054570b60cab34ff1d0f98e4b6f4e0682ca",</span><br><span class="line">            "message": "fix package.json\n",</span><br><span class="line">            "timestamp": "2016-01-06T17:38:36+08:00",</span><br><span class="line">            "url": "http://gitlab.baidu.com/lili39/mota-wap/commit/54d5a054570b60cab34ff1d0f98e4b6f4e0682ca",</span><br><span class="line">            "author": &#123;</span><br><span class="line">                "name": "lili39",</span><br><span class="line">                "email": "lili39@baidu.com"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            "id": "6650411ef21da6c8122043451473385a0528dbd4",</span><br><span class="line">            "message": "add proxy\n",</span><br><span class="line">            "timestamp": "2016-01-06T14:54:11+08:00",</span><br><span class="line">            "url": "http://gitlab.baidu.com/lili39/mota-wap/commit/6650411ef21da6c8122043451473385a0528dbd4",</span><br><span class="line">            "author": &#123;</span><br><span class="line">                "name": "lili39",</span><br><span class="line">                "email": "lili39@baidu.com"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            "id": "df33e9dd9a1975b66f59fe61ebd70b72d40e02a9",</span><br><span class="line">            "message": "title 修改\n",</span><br><span class="line">            "timestamp": "2015-12-23T18:05:03+08:00",</span><br><span class="line">            "url": "http://gitlab.baidu.com/lili39/mota-wap/commit/df33e9dd9a1975b66f59fe61ebd70b72d40e02a9",</span><br><span class="line">            "author": &#123;</span><br><span class="line">                "name": "lili39",</span><br><span class="line">                "email": "lili39@baidu.com"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    "total_commits_count": 3</span><br><span class="line">&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Server端<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">        $valid_token = <span class="string">'d49dfa7622681425fbcbdd687eb2ca59498ce852'</span>;</span><br><span class="line">        $client_token = $_GET[<span class="string">'token'</span>];</span><br><span class="line">        <span class="keyword">if</span> ($client_token !== $valid_token) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"error 10001"</span>;</span><br><span class="line">            <span class="keyword">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $json = file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line">        $data = json_decode($json, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"refs/heads/release"</span> === $data[<span class="string">'ref'</span>]) &#123;</span><br><span class="line">            system(<span class="string">'sh /home/work/mota/web_test/wx.sh'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//$file = '/home/work/mota/web_test/wx.log';</span></span><br><span class="line">        <span class="comment">//file_put_contents($file, $json, FILE_APPEND)</span></span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-<p>更新Shell脚本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;  <span class="built_in">cd</span> /home/mota/web_v2/mota-wap/</span><br><span class="line">&gt;  git checkout release</span><br><span class="line">&gt;  git pull origin release</span><br><span class="line">&gt;  <span class="comment">#如需编译执行编译命令即可</span></span><br><span class="line">&gt;  <span class="built_in">echo</span> <span class="string">'Update Success'</span></span><br><span class="line">&gt; ``` </span><br><span class="line"></span><br><span class="line">&gt; 在 Gitlab 加入 Web Hook</span><br><span class="line">&gt; &lt;img width=<span class="string">"800"</span> src=<span class="string">"http://ww3.sinaimg.cn/large/e7bf5cc4jw1ezrzbo5qa6j21hk0qcgp5.jpg"</span>&gt;</span><br><span class="line"></span><br><span class="line">&gt; 测试一下</span><br><span class="line">&gt; ```bash</span><br><span class="line">&gt; <span class="built_in">cd</span> Users/baidu/Desktop/work/mota-wap</span><br><span class="line">&gt; git add .</span><br><span class="line">&gt; git commit -m <span class="string">'web hook test'</span></span><br><span class="line">&gt; git push origin release</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>使用GitLab Web Hooks可以更便捷的实现自动化部署，本文内容只是webhook的简单应用。</p>
-</blockquote>
-
-      
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+            
+            
+                <p class="article-more-link">
+                    <a  href="/blog/2016/04/09/hello-world/#more">More >></a>
+                </p>
+            
+            <div class="clearfix"></div>
+        </div>
+        
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
-
-
-
-
-
-
-
-
-  
-  
-
+    
+    
+</div>
+            <footer>
+    <div class='footer'>
+        <div class="footer-left">
+            &copy; 2016 GisManLi
+        </div>
+        <div class="footer-right">
+            <a href="http://hexo.io/" target="_blank">Hexo</a>
         </div>
     </div>
+</footer>
+        </div>
+        <script>
+    var freashConfig = {
+        animate: undefined,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: undefined
+    }
+</script>
+    </div>
 </body>
-<script src="./js/script.js"></script>
+<script src="/blog/js/script.js"></script>
 </html>
