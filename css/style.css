@@ -1,3 +1,155 @@
+html h1,
+body h1,
+#container h1 {
+  font-size: 2em;
+}
+html h2,
+body h2,
+#container h2 {
+  font-size: 1.5em;
+}
+html h3,
+body h3,
+#container h3 {
+  font-size: 1.3em;
+}
+html h4,
+body h4,
+#container h4 {
+  font-size: 1.2em;
+}
+html h5,
+body h5,
+#container h5 {
+  font-size: 1em;
+}
+html h6,
+body h6,
+#container h6 {
+  font-size: 1em;
+  color: color-grey;
+}
+html hr,
+body hr,
+#container hr {
+  border: 1px dashed color-border;
+}
+html strong,
+body strong,
+#container strong {
+  font-weight: bold;
+}
+html em,
+body em,
+#container em,
+html cite,
+body cite,
+#container cite {
+  font-style: italic;
+}
+html sup,
+body sup,
+#container sup,
+html sub,
+body sub,
+#container sub {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+html sup,
+body sup,
+#container sup {
+  top: -0.5em;
+}
+html sub,
+body sub,
+#container sub {
+  bottom: -0.2em;
+}
+html small,
+body small,
+#container small {
+  font-size: 0.85em;
+}
+html acronym,
+body acronym,
+#container acronym,
+html abbr,
+body abbr,
+#container abbr {
+  border-bottom: 1px dotted;
+}
+html ul,
+body ul,
+#container ul,
+html ol,
+body ol,
+#container ol,
+html dl,
+body dl,
+#container dl {
+  margin: 0 20px;
+  line-height: 1.6em;
+}
+html ul ul,
+body ul ul,
+#container ul ul,
+html ol ul,
+body ol ul,
+#container ol ul,
+html ul ol,
+body ul ol,
+#container ul ol,
+html ol ol,
+body ol ol,
+#container ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+html ul,
+body ul,
+#container ul {
+  list-style: disc;
+}
+html ol,
+body ol,
+#container ol {
+  list-style: decimal;
+}
+html dt,
+body dt,
+#container dt {
+  font-weight: bold;
+}
+html .center,
+body .center,
+#container .center {
+  text-align: center;
+}
+html ul li,
+body ul li,
+#container ul li {
+  list-style: none;
+}
+html a,
+body a,
+#container a {
+  text-decoration: none;
+}
+html .clearfix,
+body .clearfix,
+#container .clearfix {
+  *zoom: 1;
+}
+html .clearfix:after,
+body .clearfix:after,
+#container .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 * {
   margin: 0;
   padding: 0;
@@ -20,15 +172,6 @@ body,
   position: absolute;
   right: 0;
   left: 300px;
-}
-.center {
-  text-align: center;
-}
-ul li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
 }
 .sidebar-top {
   height: 200px;
@@ -305,7 +448,7 @@ footer .footer .footer-right {
 .article-meta time {
   color: #aaa;
 }
-.article-meta:before {
+.article-meta time:before {
   color: #999;
   content: "\f073";
   font: 17px FontAwesome;
@@ -675,4 +818,138 @@ pre .coffeescript .title {
 pre .keyword,
 pre .javascript .function {
   color: #c9c;
+}
+.article-tag {
+  float: left;
+}
+.article-tag .article-tag-list {
+  float: left;
+}
+.article-tag:before {
+  float: left;
+  color: #999;
+  content: "\f06c";
+  font: 16px FontAwesome;
+  float: left;
+  margin-right: 10px;
+  margin-top: 6px;
+}
+.article-tag:after {
+  float: left;
+  content: "";
+  margin-right: 20px;
+  margin-top: 9px;
+  float: left;
+}
+.article-tag-list .article-tag-list-item {
+  float: left;
+}
+#header .tagcloud a {
+  color: #fff;
+}
+.tagcloud a {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 10px;
+  color: #fff;
+  height: 18px;
+  line-height: 18px;
+  float: left;
+  padding: 0 5px 0px 10px;
+  position: relative;
+  border-radius: 0 5px 5px 0;
+  margin: 5px 9px 5px 8px;
+  font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+.tagcloud a:hover {
+  opacity: 0.8;
+}
+.tagcloud a:before {
+  content: " ";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 0;
+  left: -18px;
+  border: 9px solid transparent;
+}
+.tagcloud a:after {
+  content: " ";
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 7px;
+  left: 2px;
+}
+.tagcloud a.color1 {
+  background: #ff945c;
+}
+.tagcloud a.color1:before {
+  border-right-color: #ff945c;
+}
+.tagcloud a.color2 {
+  background: #f5c7b7;
+}
+.tagcloud a.color2:before {
+  border-right-color: #f5c7b7;
+}
+.tagcloud a.color3 {
+  background: #ba8f6c;
+}
+.tagcloud a.color3:before {
+  border-right-color: #ba8f6c;
+}
+.tagcloud a.color4 {
+  background: #cfb7c4;
+}
+.tagcloud a.color4:before {
+  border-right-color: #cfb7c4;
+}
+.tagcloud a.color5 {
+  background: #7b5d5f;
+}
+.tagcloud a.color5:before {
+  border-right-color: #7b5d5f;
+}
+#page-nav {
+  text-align: center;
+  margin-top: 30px;
+}
+#page-nav .page-number {
+  width: 20px;
+  height: 20px;
+  background: #4d4d4d;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  display: inline-block;
+  color: #fff;
+  line-height: 20px;
+  font-size: 12px;
+  margin: 0 3px 30px;
+}
+#page-nav .page-number:hover {
+  background: #5e5e5e;
+}
+#page-nav .current {
+  background: #88acdb;
+  cursor: default;
+}
+#page-nav .current:hover {
+  background: #88acdb;
+}
+#page-nav .extend {
+  color: #4d4d4d;
+  margin: 0 27px;
+  opacity: 0;
+}
+#page-nav .extend:hover {
+  color: #5e5e5e;
+}
+#page-nav:hover .extend {
+  opacity: 1;
 }

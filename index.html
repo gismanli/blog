@@ -5,7 +5,7 @@
     
     <title>修行之路</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/blog/css/style.css">
 </head>
 
@@ -25,8 +25,8 @@
             <section>
                 <nav class="menu-list">
                     <ul>
-                        <li><a href="">主页</a></li>
-                        <li><a href="">文章</a></li>
+                        <li><a href="/blog/">主页</a></li>
+                        <li><a href="/blog/archives">文章</a></li>
                         <li><a href="">相册</a></li>
                     </ul>
                 </nav>
@@ -67,6 +67,7 @@
         <div class="article-entry" itemprop="articleBody">
             
                 <p>#test</p>
+<p>sdfa sdf asdf</p>
 
             
         </div>
@@ -75,7 +76,7 @@
             
             
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/test/">test</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/aaa/">aaa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/test/">test</a></li></ul>
     </div>
 
             
@@ -90,7 +91,7 @@
     
         <div class="article-meta">
             <a href="/blog/2016/04/09/hello-world/" class="article-date">
-    <time datetime="2016-04-09T11:50:26.000Z" itemprop="datePublished">2016-04-09</time>
+    <time datetime="2016-04-09T04:18:00.000Z" itemprop="datePublished">2016-04-09</time>
 </a>
         </div>
     
@@ -100,7 +101,7 @@
                 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/04/09/hello-world/">Hello World</a>
+      <a class="article-title" href="/blog/2016/04/09/hello-world/">GitLab WebHook</a>
     </h1>
   
 
@@ -128,6 +129,159 @@
                 <p class="article-more-link">
                     <a  href="/blog/2016/04/09/hello-world/#more">More >></a>
                 </p>
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
+    
+        <article id="post-跨域问题的几种解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/02/23/跨域问题的几种解决办法/" class="article-date">
+    <time datetime="2016-02-23T06:29:43.000Z" itemprop="datePublished">2016-02-23</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/02/23/跨域问题的几种解决办法/">跨域问题的几种解决办法</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>Web跨域的问题源于JS的同源策略，出于安全性考虑，JS限制不同源的web页面JS脚本进行交互，否则就会导致私密数据的泄露问题。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>1.JSONP</p>
+<blockquote>
+<p>原理是通过动态创建script标签去请求一段JS执行，迂回实现累死Ajax的请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">load_script</span>(<span class="params">url, cb</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];</span><br><span class="line">     <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">     script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">     script.url = url;</span><br><span class="line">     script.onload = script.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">         cb &amp;&amp; cb();</span><br><span class="line">     &#125;</span><br><span class="line">     head.insertBefore(script, head.fristChild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>2.HTML5 postMessage</p>
+<blockquote>
+<p>HTML5提供了跨域通信的API，当window.postMessage被调用的时候，目标窗口的message事件就会被触发，这样就可以直接实现不同域的直接信息交流。</p>
+</blockquote>
+<p>3.document.domain</p>
+<blockquote>
+<p>只能解决统一域名下，不同二级域名的跨域通信。例如person.aa.com与book.aa.com，可以将book.aa.com用iframe添加到 person.aa.com的某个页面下,在person.aa.com和iframe里面都加上document.domain = “aa.com”。</p>
+</blockquote>
+
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/跨域/">跨域</a></li></ul>
+    </div>
+
+            
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
+    
+        <article id="post-工具" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/02/19/工具/" class="article-date">
+    <time datetime="2016-02-19T10:07:04.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/02/19/工具/">工具</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <h2 id="基础类"><a href="#基础类" class="headerlink" title="基础类"></a>基础类</h2><ul>
+<li>Mac效率终极指南 : <a href="http://wiki.baidu.com/pages/viewpage.action?pageId=133607408">http://wiki.baidu.com/pages/viewpage.action?pageId=133607408</a></li>
+<li>通用环境<ul>
+<li>VirtualBox</li>
+<li>Vagrant</li>
+<li>Docker
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/工具/">工具</a></li></ul>
+    </div>
+
+            
+            
+                <p class="article-more-link">
+                    <a  href="/blog/2016/02/19/工具/#more">More >></a>
+                </p>
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
+    
+        <article id="post-welcome-to-jekyll" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/02/15/welcome-to-jekyll/" class="article-date">
+    <time datetime="2016-02-15T05:45:53.000Z" itemprop="datePublished">2016-02-15</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/02/15/welcome-to-jekyll/">Welcome to Jekyll!</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>You’ll find this post in your <code>_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code>jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+<p>To add new posts, simply add a file in the <code>_posts</code> directory that follows the convention <code>YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p>Jekyll also offers powerful support for code snippets:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_hi</span><span class="params">(name)</span></span></span><br><span class="line">  puts <span class="string">"Hi, <span class="subst">#&#123;name&#125;</span>"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">print_hi(<span class="string">'Tom'</span>)</span><br><span class="line"><span class="comment">#=&gt; prints 'Hi, Tom' to STDOUT.</span></span><br></pre></td></tr></table></figure>
+<p>Check out the <a href="http://jekyllrb.com/docs/home" target="_blank" rel="external">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll" target="_blank" rel="external">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/" target="_blank" rel="external">Jekyll Talk</a>.</p>
+
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/jekyll/">jekyll</a></li></ul>
+    </div>
+
+            
             
             <div class="clearfix"></div>
         </div>
