@@ -161,18 +161,6 @@ body,
   background: #ddd;
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#col-left {
-  width: 300px;
-  height: 100%;
-  background: #fff;
-  position: fixed;
-}
-#col-right {
-  min-height: 100%;
-  position: absolute;
-  right: 0;
-  left: 300px;
-}
 .sidebar-top {
   height: 200px;
   background: #808080;
@@ -207,16 +195,16 @@ body,
 .sidebar-content p {
   line-height: 25px;
 }
-.sidebar-content .sidebar-menu {
-  margin: 30px 0;
-}
 .sidebar-content .sidebar-menu .menu-list a {
   line-height: 30px;
 }
-.sidebar-content .sidebar-menu .menu-link {
+.sidebar-content .sidebar-link {
+  position: absolute;
+  bottom: 20%;
+  width: 100%;
   margin-top: 30px;
 }
-.sidebar-content .sidebar-menu .menu-link a {
+.sidebar-content .sidebar-link a {
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -225,16 +213,16 @@ body,
   opacity: 0.6;
   transition: all 1s;
 }
-.sidebar-content .sidebar-menu .menu-link a:nth-child(1) {
+.sidebar-content .sidebar-link a:nth-child(1) {
   background: url("../img/github.png") no-repeat center center #afb6ca;
 }
-.sidebar-content .sidebar-menu .menu-link a:nth-child(2) {
+.sidebar-content .sidebar-link a:nth-child(2) {
   background: url("../img/weibo.png") no-repeat center center #aaf;
 }
-.sidebar-content .sidebar-menu .menu-link a:nth-child(3) {
+.sidebar-content .sidebar-link a:nth-child(3) {
   background: url("../img/rss.png") no-repeat center center #ef7522;
 }
-.sidebar-content .sidebar-menu .menu-link a:hover {
+.sidebar-content .sidebar-link a:hover {
   opacity: 1;
 }
 @-moz-keyframes rotate {
@@ -269,7 +257,7 @@ body,
     transform: rotate(360deg);
   }
 }
-footer {
+.footer {
   font-size: 12px;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   text-shadow: 0 1px #fff;
@@ -278,13 +266,13 @@ footer {
   text-align: center;
   padding-bottom: 40px;
 }
-footer .footer {
+.footer .footer {
   padding: 0 30px;
 }
-footer .footer .footer-left {
+.footer .footer .footer-left {
   float: left;
 }
-footer .footer .footer-right {
+.footer .footer .footer-right {
   float: right;
 }
 .archives-wrap {
@@ -952,4 +940,209 @@ pre .javascript .function {
 }
 #page-nav:hover .extend {
   opacity: 1;
+}
+#container {
+  position: relative;
+  min-height: 100%;
+}
+#container .col-left {
+  background: #fff;
+  width: 300px;
+  position: fixed;
+  opacity: 1;
+  transition: all 0.2s ease-in;
+  height: 100%;
+  z-index: 100;
+}
+#container .col-left .overlay {
+  width: 100%;
+  height: 180px;
+  background-color: #000;
+  position: absolute;
+  opacity: 0.7;
+}
+#container .col-left .intrude-less {
+  width: 76%;
+  text-align: center;
+  margin: 112px auto 0;
+}
+#container .col-mid {
+  position: absolute;
+  right: 0;
+  min-height: 100%;
+  background: #eaeaea;
+  left: 300px;
+  width: auto;
+}
+@media screen and (max-width: 800px) {
+  #container .col-left {
+    top: 0;
+    width: 100%;
+    display: block;
+    height: 300px;
+    position: absolute;
+  }
+  #container .col-mid {
+    left: 0;
+    top: 300px;
+  }
+  #container .article-header {
+    border-left: none;
+    padding: 0;
+    border-bottom: 1px dotted #ddd;
+  }
+  #container .article-header h1 {
+    margin-bottom: 10px;
+  }
+  #container .article-info-index.article-info {
+    padding-top: 10px;
+    margin: 0;
+    border-top: 1px solid #ddd;
+  }
+  #container .article-info-post.article-info {
+    margin: 0;
+    padding-top: 10px;
+    border: none;
+  }
+  #container .article-more-link a {
+    float: right;
+  }
+  #container .article {
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+  }
+  #container .article .article-entry {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 10px;
+  }
+  #container .article .article-title {
+    font-size: 18px;
+    max-width: 185px;
+    display: block;
+    margin: 0;
+  }
+  #container .article .article-meta {
+    width: auto;
+    height: 30px;
+    margin-top: -5px;
+    position: ralative;
+  }
+  #container .article .article-meta .article-date {
+    font-size: 12px;
+    border-radius: 0;
+    color: #666;
+    background: none;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    margin-left: 10px;
+  }
+  #container .article .article-meta .article-date time {
+    width: auto;
+    float: right;
+    margin-right: 10px;
+  }
+  #container .article .article-meta .article-tag-list {
+    margin-top: 7px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+  #container .article .article-meta .article-tag-list:before {
+    float: left;
+    margin-top: 1px;
+    left: 0;
+  }
+  #container .article .article-meta .article-tag-list .article-tag-list-item {
+    float: left;
+    padding-left: 0;
+    width: auto;
+    max-width: 83px;
+  }
+  #container .article .article-meta .article-category {
+    margin-top: 7px;
+    position: absolute;
+    right: 10px;
+    top: -30px;
+  }
+  #container .article .article-meta .article-category:before {
+    float: left;
+    margin-top: 1px;
+    left: 15px;
+  }
+  #container .article .article-meta .article-category .article-category-link {
+    max-width: 83px;
+    width: auto;
+    padding-left: 10px;
+  }
+  #container .article .article-nav-link-wrap {
+    margin: 5px 0;
+  }
+  #container .article .article-nav-link-wrap strong {
+    float: left;
+    margin-right: 5px;
+  }
+  #container .article #article-nav-older {
+    float: none;
+    display: block;
+  }
+  #container #page-nav .extend {
+    opacity: 1;
+  }
+  #container .info-on-right {
+    float: initial;
+  }
+  #container .archives-wrap {
+    margin: 10px 10px 0px;
+    padding: 10px;
+  }
+  #container .archives-wrap .archive-article-title {
+    font-size: 14px;
+  }
+  #container .archives-wrap .archive-year-wrap {
+    position: relative;
+    padding: 0 0 0 0;
+  }
+  #container .archives-wrap .archive-year-wrap a {
+    padding: 0 0 0 0;
+  }
+  #container .archives-wrap .article-meta .archive-article-date {
+    font-size: 12px;
+    margin-right: 10px;
+    margin-top: -5px;
+  }
+  #container .archives-wrap .article-meta .article-tag-list-link {
+    font-size: 12px;
+  }
+  #container .archives .archive-article {
+    padding: 10px 0;
+    margin-left: 0;
+  }
+  #container .sidebar-top {
+    height: 100px;
+    background: #808080;
+    width: 100%;
+    position: relative;
+  }
+  #container .sidebar-icon {
+    position: relative;
+    margin-left: -75px;
+    left: 50%;
+  }
+  #container .sidebar-link {
+    bottom: 10%;
+  }
+  #container .sidebar-content h1 {
+    margin: 0;
+  }
+  #container .sidebar-content p {
+    line-height: 25px;
+  }
+  #container .sidebar-content ul li {
+    display: inline-block;
+  }
 }

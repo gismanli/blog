@@ -11,7 +11,7 @@
 
 <body>
     <div id="container">
-        <div id="col-left">
+        <div class="col-left">
             <sidebar>
     <div class="sidebar-top"></div>
     
@@ -19,28 +19,32 @@
         <div class="sidebar-icon">
             <img src="https://avatars0.githubusercontent.com/u/8967577?v=3&s=460" width="140" alt="">
         </div>
-        <h1>GisMan</h1>
-        <p>小白</p>
+        <h1>GisManLi</h1>
+        
+            <p class="header-subtitle">FE Novice</p>
+        
         <div class="sidebar-menu">
-            <section>
-                <nav class="menu-list">
-                    <ul>
-                        <li><a href="/blog/">主页</a></li>
-                        <li><a href="/blog/archives">文章</a></li>
-                        <li><a href="">相册</a></li>
-                    </ul>
-                </nav>
-                <nav class="menu-link">
-                    <a href="//github.com/gismanli"></a>
-                    <a href="http://weibo.com/gismanli"></a>
-                    <a href="javascript:;"></a>
-                </nav>
-            </section>
+            <ul>
+                
+                    <li>
+                        <a href="/blog/">Home</a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/archives">Archives</a>
+                    </li>
+                
+            </ul>
+        </div>
+        <div class="sidebar-link">
+            <a href="//github.com/gismanli"></a>
+            <a href="http://weibo.com/gismanli"></a>
+            <a href="javascript:;"></a>
         </div>
     </div>
 </sidebar>
         </div>
-        <div id="col-right">
+        <div class="col-mid">
             <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
     
         <div class="article-meta">
@@ -132,15 +136,12 @@
         <div class="footer-left">
             &copy; 2016 GisManLi
         </div>
-        <div class="footer-right">
-            <a href="http://hexo.io/" target="_blank">Hexo</a>
-        </div>
     </div>
 </footer>
         </div>
         <script>
     var freashConfig = {
-        animate: undefined,
+        animate: false,
         isHome: false,
         isPost: true,
         isArchive: false,
