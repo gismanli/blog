@@ -137,6 +137,7 @@ html a,
 body a,
 #container a {
   text-decoration: none;
+  color: #bbb;
 }
 html .clearfix,
 body .clearfix,
@@ -205,8 +206,8 @@ body,
   margin-top: 30px;
 }
 .sidebar-content .sidebar-link a {
-  width: 30px;
-  height: 30px;
+  width: 31px;
+  height: 31px;
   border-radius: 100%;
   display: inline-block;
   margin: 0 10px;
@@ -981,12 +982,12 @@ pre .javascript .function {
     top: 0;
     width: 100%;
     display: block;
-    height: 300px;
+    height: 250px;
     position: absolute;
   }
   #container .col-mid {
     left: 0;
-    top: 300px;
+    top: 250px;
   }
   #container .article-header {
     border-left: none;
@@ -1124,6 +1125,9 @@ pre .javascript .function {
     padding: 10px 0;
     margin-left: 0;
   }
+  #container .sidebar-menu {
+    margin: 10px 0;
+  }
   #container .sidebar-top {
     height: 100px;
     background: #808080;
@@ -1138,11 +1142,9 @@ pre .javascript .function {
   #container .sidebar-link {
     bottom: 10%;
   }
-  #container .sidebar-content h1 {
-    margin: 0;
-  }
+  #container .sidebar-content h1,
   #container .sidebar-content p {
-    line-height: 25px;
+    display: none;
   }
   #container .sidebar-content ul li {
     display: inline-block;
