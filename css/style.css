@@ -199,8 +199,8 @@ body,
   line-height: 25px;
 }
 .sidebar-content .sidebar-menu {
-  position: absolute;
-  bottom: 60%;
+  position: relative;
+  top: 10%;
   width: 100%;
 }
 .sidebar-content .sidebar-menu .menu-list a {
