@@ -983,6 +983,7 @@ pre .javascript .function {
   background: #eaeaea;
   left: 300px;
   width: auto;
+  z-index: 100;
 }
 @media screen and (max-width: 800px) {
   #container .col-left {
