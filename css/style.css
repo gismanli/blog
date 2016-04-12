@@ -984,12 +984,12 @@ pre .javascript .function {
     top: 0;
     width: 100%;
     display: block;
-    height: 250px;
+    height: 230px;
     position: absolute;
   }
   #container .col-mid {
     left: 0;
-    top: 250px;
+    top: 230px;
   }
   #container .article-header {
     border-left: none;
@@ -1128,7 +1128,7 @@ pre .javascript .function {
     margin-left: 0;
   }
   #container .sidebar-menu {
-    margin: 10px 0;
+    margin: 20px 0;
   }
   #container .sidebar-top {
     height: 100px;
@@ -1142,7 +1142,7 @@ pre .javascript .function {
     left: 50%;
   }
   #container .sidebar-link {
-    bottom: 10%;
+    display: none;
   }
   #container .sidebar-content h1,
   #container .sidebar-content p {
