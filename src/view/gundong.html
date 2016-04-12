@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #demo { 
+            float: left;
+            overflow: hidden; 
+            border: 1px dashed #CCC; 
+            height: 179.984px;
+            width: 320px;
+        } 
+        #demo img { 
+            display: block;
+            width: 320px;
+        } 
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <div id="demo1">
+            <img src="http://be-fe.github.io/static/images/saber/0.jpg">
+            <img src="http://be-fe.github.io/static/images/saber/1.jpg">
+            <img src="http://be-fe.github.io/static/images/saber/2.jpg">
+            <img src="http://be-fe.github.io/static/images/saber/3.jpg">
+            <img src="http://be-fe.github.io/static/images/saber/4.jpg">
+            <img src="http://be-fe.github.io/static/images/saber/5.jpg">
+        </div>
+        <div id="demo2"></div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var demo = document.getElementById('demo'),
+            demo1 = document.getElementById('demo1'),
+            demo2 = document.getElementById('demo2'),
+            speed = 100;
+
+        demo2.innerHTML = demo1.innerHTML;
+
+        function Marquee() {
+            demo2.offsetTop - demo.scrollTop <= 0
+                ? demo.scrollTop -= demo1.offsetHeight
+                : demo.scrollTop++;
+        }
+
+        setInterval(Marquee, speed);
+    }
+</script>
+</html>
