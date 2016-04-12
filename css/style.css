@@ -198,6 +198,11 @@ body,
 .sidebar-content p {
   line-height: 25px;
 }
+.sidebar-content .sidebar-menu {
+  position: absolute;
+  bottom: 60%;
+  width: 100%;
+}
 .sidebar-content .sidebar-menu .menu-list a {
   line-height: 30px;
 }
@@ -1128,6 +1133,7 @@ pre .javascript .function {
     margin-left: 0;
   }
   #container .sidebar-menu {
+    position: static;
     margin: 20px 0;
   }
   #container .sidebar-top {
