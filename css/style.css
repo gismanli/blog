@@ -137,7 +137,6 @@ html a,
 body a,
 #container a {
   text-decoration: none;
-  color: #bbb;
 }
 html .clearfix,
 body .clearfix,
@@ -175,6 +174,9 @@ body,
   top: -75px;
   overflow: auto;
   color: #808080;
+}
+.sidebar-content a {
+  color: #bbb;
 }
 .sidebar-content .sidebar-icon {
   height: 150px;
