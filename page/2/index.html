@@ -51,6 +51,61 @@
         <div class="col-mid">
             <div class="body-wrap">
     
+        <article id="post-跨域问题的几种解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/02/23/跨域问题的几种解决办法/" class="article-date">
+    <time datetime="2016-02-23T06:29:43.000Z" itemprop="datePublished">2016-02-23</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/02/23/跨域问题的几种解决办法/">跨域问题的几种解决办法</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>Web跨域的问题源于JS的同源策略，出于安全性考虑，JS限制不同源的web页面JS脚本进行交互，否则就会导致私密数据的泄露问题。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>1.JSONP</p>
+<blockquote>
+<p>原理是通过动态创建script标签去请求一段JS执行，迂回实现累死Ajax的请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">load_script</span>(<span class="params">url, cb</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];</span><br><span class="line">     <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">     script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">     script.url = url;</span><br><span class="line">     script.onload = script.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">         cb &amp;&amp; cb();</span><br><span class="line">     &#125;</span><br><span class="line">     head.insertBefore(script, head.fristChild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>2.HTML5 postMessage</p>
+<blockquote>
+<p>HTML5提供了跨域通信的API，当window.postMessage被调用的时候，目标窗口的message事件就会被触发，这样就可以直接实现不同域的直接信息交流。</p>
+</blockquote>
+<p>3.document.domain</p>
+<blockquote>
+<p>只能解决统一域名下，不同二级域名的跨域通信。例如person.aa.com与book.aa.com，可以将book.aa.com用iframe添加到 person.aa.com的某个页面下,在person.aa.com和iframe里面都加上document.domain = “aa.com”。</p>
+</blockquote>
+
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/跨域/">跨域</a></li></ul>
+    </div>
+
+            
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
+    
         <article id="post-工具" class="article article-type-post" itemscope itemprop="blogPost">
     
         <div class="article-meta">

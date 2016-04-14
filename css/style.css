@@ -27,12 +27,12 @@ html h6,
 body h6,
 #container h6 {
   font-size: 1em;
-  color: color-grey;
+  color: #999;
 }
 html hr,
 body hr,
 #container hr {
-  border: 1px dashed color-border;
+  border: 1px dashed #ddd;
 }
 html strong,
 body strong,
@@ -658,7 +658,7 @@ footer .footer .footer-right {
   margin: 0 -20px;
   padding: 15px 20px;
   border-style: solid;
-  border-color: color-border;
+  border-color: #ddd;
   border-width: 1px 0;
   overflow: auto;
   color: #ccc;
@@ -674,7 +674,7 @@ footer .footer .footer-right {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .article-entry code {
-  background: color-background;
+  background: #eee;
   text-shadow: 0 1px #fff;
   padding: 0 0.3em;
 }
@@ -718,7 +718,7 @@ footer .footer .footer-right {
 .article-entry .gist {
   margin: 0 -20px;
   border-style: solid;
-  border-color: color-border;
+  border-color: #ddd;
   border-width: 1px 0;
   background: #2d2d2d;
   padding: 15px 20px 15px 0;
@@ -755,7 +755,7 @@ footer .footer .footer-right {
   margin-left: 20px;
 }
 .article-entry .gist .gist-file .gist-meta a {
-  color: color-link;
+  color: #258fb8;
   font-weight: normal;
 }
 .article-entry .gist .gist-file .gist-meta a:hover {
