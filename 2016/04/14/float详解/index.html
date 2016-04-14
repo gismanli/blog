@@ -85,11 +85,9 @@
 <p>本文涉及的知识还有：<code>文档流</code> <code>行内元素&amp;块级元素</code></p>
 <a id="more"></a>
 <hr>
-<h2 id="文档流-amp-浮动层"><a href="#文档流-amp-浮动层" class="headerlink" title="文档流&amp;浮动层"></a><strong>文档流&amp;浮动层</strong></h2><ol>
-<li>文档流<blockquote>
-<p>顾名思义，指的是html流，其规则是从上到下，从左到右，遇块换行</p>
-</blockquote>
-</li>
+<h2 id="文档流-amp-浮动层"><a href="#文档流-amp-浮动层" class="headerlink" title="文档流&amp;浮动层"></a><strong>文档流&amp;浮动层</strong></h2><blockquote>
+<ol>
+<li>文档流<br>顾名思义，指的是html流，其规则是从上到下，从左到右，遇块换行</li>
 <li>浮动层<ul>
 <li>给元素加float属性，该元素就会脱离文档流，紧贴着父元素或前兄弟节点</li>
 <li><strong>元素脱离文档流后空出的空间由后面的元素填充，并且浮动元素会覆盖在上面</strong></li>
@@ -97,37 +95,42 @@
 </ul>
 </li>
 </ol>
-<h2 id="行内元素-amp-块级元素"><a href="#行内元素-amp-块级元素" class="headerlink" title="行内元素&amp;块级元素"></a><strong>行内元素&amp;块级元素</strong></h2><ul>
+</blockquote>
+<h2 id="行内元素-amp-块级元素"><a href="#行内元素-amp-块级元素" class="headerlink" title="行内元素&amp;块级元素"></a><strong>行内元素&amp;块级元素</strong></h2><blockquote>
+<ul>
 <li>俩者最大的区别就是块级元素占一行，而行内元素可以显示在一排，不过也可通过设置样式，使其互相转换</li>
 <li><strong>行内元素设置宽高无效，但是可以通过line-height设置高度</strong></li>
 <li><strong>行内元素默认情况下，margin和padding都是左右有效，上下无效(有效是对其它元素的排列，其自身的是有座用的)</strong></li>
-<li>text-align是对块级元素的行内内容(行内元素组成的内容)生效的(W3C标准)，不过傻逼<strong>IE(6/7/8)</strong>还可以让块级内容居中<div style="text-align:center"><br>  <img src="http://ww1.sinaimg.cn/large/e7bf5cc4jw1f2wnbbpn3ej20hs0a1ab7.jpg"><br></div>
+<li>text-align是对块级元素的行内内容(行内元素组成的内容)生效的(W3C标准)，不过傻逼<strong>IE(6/7/8)</strong>还可以让块级内容居中<div style="text-align:center"><img src="http://ww1.sinaimg.cn/large/e7bf5cc4jw1f2wnbbpn3ej20hs0a1ab7.jpg"></div>
 
 </li>
 </ul>
-<h2 id="常见float值"><a href="#常见float值" class="headerlink" title="常见float值"></a><strong>常见float值</strong></h2><ul>
+</blockquote>
+<h2 id="常见float值"><a href="#常见float值" class="headerlink" title="常见float值"></a><strong>常见float值</strong></h2><blockquote>
+<ul>
 <li>none</li>
 <li>left</li>
 <li>right</li>
 <li>inherit</li>
 </ul>
+</blockquote>
 <h3 id="兄弟元素含有float"><a href="#兄弟元素含有float" class="headerlink" title="兄弟元素含有float"></a><strong>兄弟元素含有float</strong></h3><ol>
 <li><p>给全部元素float:left</p>
 <blockquote>
-<ol>
+<ul>
 <li>标准文档流靠前的元素的排在左面</li>
 <li><strong>如果浏览器足够容下这些元素，那就一行显示(可以想象成行内元素)</strong></li>
 <li>容器宽不足以容下，就会换行</li>
-</ol>
+</ul>
 </blockquote>
 </li>
 <li><p>给全部元素float:right</p>
 <blockquote>
-<ol>
+<ul>
 <li>标准文档流靠前的元素的排在右面</li>
 <li><strong>如果浏览器足够容下这些元素，那就一行显示(可以想象成行内元素)</strong></li>
 <li>容器宽不足以容下，就会换行</li>
-</ol>
+</ul>
 </blockquote>
 </li>
 <li><p>当元素height不同时一点点缩小屏幕</p>
@@ -211,6 +214,10 @@
 </table>
 <blockquote>
 <p>具体可以自行编写测试</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>并没有说明float之前的元素，是因为浮动不会影响其之前的文档排列，这也是最开始那个问题的掉下来的原因</strong></p>
 </blockquote>
 <hr>
 <blockquote>
