@@ -542,6 +542,9 @@ footer .footer .footer-right {
 .article-entry em {
   font-style: italic;
 }
+.article-entry ul {
+  margin-top: 5px;
+}
 .article-entry ul li:before {
   content: "";
   width: 6px;
