@@ -543,7 +543,7 @@ footer .footer .footer-right {
   font-style: italic;
 }
 .article-entry ul {
-  margin-top: 5px;
+  margin-top: 5px !important;
 }
 .article-entry ul li:before {
   content: "";
