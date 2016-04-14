@@ -1034,6 +1034,9 @@ pre .javascript .function {
   #container .article .article-entry ul li:before {
     margin-top: 5px;
   }
+  #container .article .article-entry ol li {
+    font-size: 12px;
+  }
   #container .article .article-title {
     font-size: 18px;
     max-width: 185px;
