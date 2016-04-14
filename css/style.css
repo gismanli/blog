@@ -556,8 +556,7 @@ footer .footer .footer-right {
 }
 .article-entry ul,
 .article-entry ol {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 14px;
   margin: 10px 0px;
 }
 .article-entry li ul,
@@ -1028,6 +1027,12 @@ pre .javascript .function {
     padding-left: 0;
     padding-right: 0;
     padding-top: 10px;
+  }
+  #container .article .article-entry ul {
+    font-size: 12px;
+  }
+  #container .article .article-entry ul li:before {
+    margin-top: 5px;
   }
   #container .article .article-title {
     font-size: 18px;
