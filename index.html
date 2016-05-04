@@ -51,6 +51,59 @@
         <div class="col-mid">
             <div class="body-wrap">
     
+        <article id="post-JS单线程分析" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/05/04/JS单线程分析/" class="article-date">
+    <time datetime="2016-05-04T15:25:42.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/05/04/JS单线程分析/">JS单线程分析</a>
+    </h1>
+  
+
+            </header>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>本文源于对一段JS的代码的深究</p>
+<blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>这段代码我最早遇见是当时面试美团的一个题</p>
+<p>大家可以自己去试一试结果，知道结果后估计心情如下</p>
+<p><img src="http://ww1.sinaimg.cn/large/e7bf5cc4jw1f3jtocttbjj206o06qaa4.jpg" alt=""></p>
+<p>题目解释具体点击More查看全部</p>
+            
+        </div>
+        
+        <div class="article-info article-info-index">
+            
+            
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li></ul>
+    </div>
+
+            
+            
+                <p class="article-more-link">
+                    <a  href="/blog/2016/05/04/JS单线程分析/#more">More >></a>
+                </p>
+            
+            <div class="clearfix"></div>
+        </div>
+        
+    </div>
+</article>
+    
         <article id="post-不定宽高图片水平垂直居中" class="article article-type-post" itemscope itemprop="blogPost">
     
         <div class="article-meta">
@@ -243,48 +296,6 @@
             
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-            
-            
-            <div class="clearfix"></div>
-        </div>
-        
-    </div>
-</article>
-    
-        <article id="post-轮播图实现" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <div class="article-meta">
-            <a href="/blog/2016/04/11/轮播图实现/" class="article-date">
-    <time datetime="2016-04-11T15:45:30.000Z" itemprop="datePublished">2016-04-11</time>
-</a>
-        </div>
-    
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/04/11/轮播图实现/">轮播图</a>
-    </h1>
-  
-
-            </header>
-            
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <iframe src="/blog/src/view/lunbo.html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="300" width="700"></iframe>
-            
-        </div>
-        
-        <div class="article-info article-info-index">
-            
-            
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li></ul>
     </div>
 
             

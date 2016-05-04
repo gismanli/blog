@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>JS单线程分析 | 修行</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico" />
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="col-left">
+            <sidebar>
+    <div class="sidebar-top"></div>
+    <div class="sidebar-content center">
+        <div class="sidebar-icon">
+            <img src="https://avatars0.githubusercontent.com/u/8967577?v=3&s=460" width="140" alt="">
+        </div>
+        <h1>GisMan</h1>
+        
+            <p class="header-subtitle">FE Novice</p>
+        
+        <div class="sidebar-menu">
+            <ul>
+                
+                    <li>
+                        <a href="/blog/">主页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/archives">归档</a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/tags/随笔/">随笔</a>
+                    </li>
+                
+            </ul>
+        </div>
+        <div class="sidebar-link">
+            <a href="//github.com/gismanli"></a>
+            <a href="http://weibo.com/gismanli"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+</sidebar>
+        </div>
+        <div class="col-mid">
+            <div class="body-wrap"><article id="post-JS单线程分析" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <div class="article-meta">
+            <a href="/blog/2016/05/04/JS单线程分析/" class="article-date">
+    <time datetime="2016-05-04T15:25:42.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+        </div>
+    
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 class="article-title" itemprop="name">
+      JS单线程分析
+    </h1>
+  
+
+            </header>
+            
+            <div class="article-info article-info-post">
+                
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li></ul>
+    </div>
+
+                
+                <div class="clearfix"></div>
+            </div>
+            
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p>本文源于对一段JS的代码的深究</p>
+<blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>这段代码我最早遇见是当时面试美团的一个题</p>
+<p>大家可以自己去试一试结果，知道结果后估计心情如下</p>
+<p><img src="http://ww1.sinaimg.cn/large/e7bf5cc4jw1f3jtocttbjj206o06qaa4.jpg" alt=""></p>
+<p>题目解释具体点击More查看全部</p>
+<a id="more"></a>
+<p>我当时蒙了个一秒后输出222，但其实这是不对的，正确的答案是333，输出时间为大概稍大于1秒后。</p>
+<p>这段代码看似简单，其实包含了<code>闭包</code>，<code>JS单线程</code>，<code>浏览器多线程</code>，<code>call/apply/bind</code>等知识点</p>
+<p>首先解释下这段代码</p>
+<ol>
+<li>for循环里嵌套了一个定时器，定时器定义一个console.log(i)，但是呢setTimeout是一个异步事件，所以并不会立即执行，会把这个操作放到Even Loop的队列中，等待当前代码执行完在执行，不明白后续会介绍，所以，for循环执行完后的1秒才会执行这些队列。</li>
+<li>这里有三个待执行，但是当执行console.log时，我们取i时，其实for循环已经停止了，即<code>i === 3</code>，所以输出的i值为3，这里可能会有疑问，为毛i不是0，1，2呢，这里涉及到闭包知识，闭包内的自由变量其实是一种<strong>引用</strong>，而不是<strong>值</strong>，闭包具体以后会单独详细介绍</li>
+</ol>
+<p>然后这段代码搞明白了，继续修改，如何才能输出0，1，2呢？</p>
+<p>这里列举几个常用的方法，可以采用call、apply、bind或者传值实现</p>
+<blockquote>
+   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout((<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;).call(<span class="keyword">this</span>), <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// apply</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout((<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;).apply(<span class="keyword">this</span>), <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// bind</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout((<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;).bind(<span class="keyword">this</span>)(), <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 通过参数传值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(j)</span><br><span class="line">	&#125;(i), <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<pre><code>`call`、`apply`、`bind`三者的区别后续会单独开篇介绍
+</code></pre><p>以上是对最开始代码的自我见解，如有不对，希望指出否正。</p>
+<p>理解了，在做一个一样的理解下</p>
+<blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'first'</span>);</span><br><span class="line">   	setTimeout((<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(<span class="string">'second'</span>);</span><br><span class="line">   	&#125;), <span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</span><br><span class="line">   	foo();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<p>以下是本文的重点，js的单线程进行分析</p>
+<p>首先的一个问题就是，大家都知道JS是单线程的，那为啥Ajax能实现异步和回调处理的？还有上面的setTimeout看起来好像是多线程啊？</p>
+<h4 id="JS的确是单线程的"><a href="#JS的确是单线程的" class="headerlink" title="JS的确是单线程的"></a>JS的确是单线程的</h4><p>JS在浏览器中运行，window就是一个单线程，如果了解单线程，特定时间只有特定的代码运行，同时会堵塞后面的代码。<br>But<strong>浏览器确实多线程的</strong>，浏览器是事件驱动，当JS单线程执行时，如果碰到异步操作，譬如<code>click</code>,<code>setTimeout</code>等，就会把操作放在执行队列中，然后等待当前代码执行完毕在执行。</p>
+<h4 id="浏览器的异步事件驱动"><a href="#浏览器的异步事件驱动" class="headerlink" title="浏览器的异步事件驱动"></a>浏览器的异步事件驱动</h4><p>上面说到浏览器是事件驱动的，其实浏览器很多行为都是异步，异步可以理解为回调，这些异步操作有鼠标点击事件、定时器触发事件、XMLHttpRequest完成回调等等，当异步事件发生时，就会把事件塞到事件队列里等待执行，并且遵循先进来的先执行。</p>
+<h4 id="Ajax异步"><a href="#Ajax异步" class="headerlink" title="Ajax异步"></a>Ajax异步</h4><p>前面提到Ajax也算是异步操作，就会有人问，ajax是真正的异步吗？其实ajax的请求确实是一步的，当发生ajax请求时，浏览器会单开一个线程去处理，但是ajax的事件回调的时候其实是放入Event loop单线程事件队列等候处理的。</p>
+<h4 id="setTimeout-function-0-的妙用"><a href="#setTimeout-function-0-的妙用" class="headerlink" title="setTimeout(function(){}, 0)的妙用"></a>setTimeout(function(){}, 0)的妙用</h4><p>JS写多了，会发现这段代码很好用，是因为模拟js多线程环境吗？答案是否，js就是单线程的，就像乌龟的屁股，龟（贵）腚（定）的，我们无法改变。这段代码的神奇就在于，告诉js引擎，0ms后把function放到主事件队列中，等待当前代码执行完在执行。场景应用：</p>
+<ul>
+<li>让浏览器渲染当前的变化(reDraw) </li>
+<li>改变执行顺序</li>
+</ul>
+<p>demo:</p>
+<blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'do'</span>&gt;</span>Do long calc!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'status'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'result'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'do'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="string">'#status'</span>).text(<span class="string">'calculating....'</span>);</span><br><span class="line"> 		<span class="comment">//long(); //执行长时间任务，阻塞，点击后要很久才能变成calculating...</span></span><br><span class="line"> 		setTimeout(long,<span class="number">50</span>);<span class="comment">//用定时器，大约50ms以后执行长时间任务，放入执行队列，但在reDraw之后了，根据先进先出原则</span></span><br><span class="line">	&#125;) </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">long</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 		<span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++)&#123;</span><br><span class="line">   		<span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; j++)&#123;</span><br><span class="line">     			<span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; <span class="number">1000</span>; k++)&#123;</span><br><span class="line">       			result = result + i + j + k;</span><br><span class="line">     			&#125;</span><br><span class="line">   		&#125; </span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="built_in">document</span>.getElementById(<span class="string">'status'</span>).innerHTML = <span class="string">'calclation done'</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="非阻塞js的实现"><a href="#非阻塞js的实现" class="headerlink" title="非阻塞js的实现"></a>非阻塞js的实现</h4><ul>
+<li>HTML5的<code>defer</code>和<code>async</code></li>
+<li>动态加载script（jsonp）</li>
+</ul>
+
+            
+        </div>
+        
+    </div>
+</article></div>
+            <footer>
+    <div class='footer'>
+        <div class="footer-left">
+            &copy; 2016 GisMan
+        </div>
+        <div class="footer-right">
+            <a href="http://hexo.io/" target="_blank">Hexo</a>
+        </div>
+    </div>
+</footer>
+        </div>
+        <script>
+    var freashConfig = {
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: undefined
+    }
+</script>
+    </div>
+</body>
+<script src="/blog/js/script.js"></script>
+</html>
