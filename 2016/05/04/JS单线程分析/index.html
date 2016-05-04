@@ -115,7 +115,7 @@
 <h2 id="JS的确是单线程的"><a href="#JS的确是单线程的" class="headerlink" title="JS的确是单线程的"></a>JS的确是单线程的</h2><p>JS在浏览器中运行，window就是一个单线程，如果了解单线程，特定时间只有特定的代码运行，同时会堵塞后面的代码。<br>But<strong>浏览器确实多线程的</strong>，浏览器是事件驱动，当JS单线程执行时，如果碰到异步操作，譬如<code>click</code>,<code>setTimeout</code>等，就会把操作放在执行队列中，然后等待当前代码执行完毕在执行。</p>
 <h2 id="浏览器的异步事件驱动"><a href="#浏览器的异步事件驱动" class="headerlink" title="浏览器的异步事件驱动"></a>浏览器的异步事件驱动</h2><p>上面说到浏览器是事件驱动的，其实浏览器很多行为都是异步，异步可以理解为回调，这些异步操作有鼠标点击事件、定时器触发事件、XMLHttpRequest完成回调等等，当异步事件发生时，就会把事件塞到事件队列里等待执行，并且遵循先进来的先执行。</p>
 <h2 id="Ajax异步"><a href="#Ajax异步" class="headerlink" title="Ajax异步"></a>Ajax异步</h2><p>前面提到Ajax也算是异步操作，就会有人问，ajax是真正的异步吗？其实ajax的请求确实是一步的，当发生ajax请求时，浏览器会单开一个线程去处理，但是ajax的事件回调的时候其实是放入Event loop单线程事件队列等候处理的。</p>
-<h2 id="setTimeout-function-0-的妙用"><a href="#setTimeout-function-0-的妙用" class="headerlink" title="setTimeout(function(){}, 0)的妙用"></a>setTimeout(function(){}, 0)的妙用</h2><p>JS写多了，会发现这段代码很好用，是因为模拟js多线程环境吗？答案是否，js就是单线程的，就像乌龟的屁股，龟（贵）腚（定）的，我们无法改变。这段代码的神奇就在于，告诉js引擎，0ms后把function放到主事件队列中，等待当前代码执行完在执行。场景应用：</p>
+<h2 id="setTimeout-function-0-的妙用"><a href="#setTimeout-function-0-的妙用" class="headerlink" title="setTimeout(function(){}, 0)的妙用"></a><code>setTimeout(function(){}, 0)</code>的妙用</h2><p>JS写多了，会发现这段代码很好用，是因为模拟js多线程环境吗？答案是否，js就是单线程的，就像乌龟的屁股，龟（贵）腚（定）的，我们无法改变。这段代码的神奇就在于，告诉js引擎，0ms后把function放到主事件队列中，等待当前代码执行完在执行。场景应用：</p>
 <ul>
 <li>让浏览器渲染当前的变化(reDraw) </li>
 <li>改变执行顺序</li>
